@@ -11,59 +11,52 @@ db = SQLAlchemy(app)
 
 
 estate_owners = db.Table('estate_owner',
-	db.Column('customer_id', db.Integer, db.ForeignKey('customer.id')),
-	db.Column('estate_id', db.Integer, db.ForeignKey('estate.id')),
+	db.Column('customer_id', db.Integer, db.ForeignKey('customer.id'), primary_key=True),
+	db.Column('estate_id', db.Integer, db.ForeignKey('estate.id'), primary_key=True),
 )
 
 customer_contract_buy = db.Table('customer_contract_buy',
-	db.Column('customer_id', db.Integer, db.ForeignKey('customer.id')),
-	db.Column('contract_id', db.Integer, db.ForeignKey('contract.id')),
+	db.Column('customer_id', db.Integer, db.ForeignKey('customer.id'), primary_key=True),
+	db.Column('contract_id', db.Integer, db.ForeignKey('contract.id'), primary_key=True),
 )
 
 customer_contract_sell = db.Table('customer_contract_sell',
-	db.Column('customer_id', db.Integer, db.ForeignKey('customer.id')),
-	db.Column('contract_id', db.Integer, db.ForeignKey('contract.id')),
+	db.Column('customer_id', db.Integer, db.ForeignKey('customer.id'), primary_key=True),
+	db.Column('contract_id', db.Integer, db.ForeignKey('contract.id'), primary_key=True),
 )
+
 
 class Employee(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
+	username = db.Column(db.String(50), unique=True, nullable=False)
+	password = db.Column(db.String(50), unique=True, nullable=False)
 	first_name = db.Column(db.String(50))
 	last_name = db.Column(db.String(50))
-	fathers_name = db.Column(db.String(50))
 	identity_card = db.Column(db.String(12), unique=True)
 	mobile = db.Column(db.String(12), unique=True)
-	phone_number = db.Column(db.String(12), unique=True)
 	email = db.Column(db.String(120), unique=True)
-	address = db.Column(db.String(250))
 	position = db.Column(db.String(20))
 	salary = db.Column(db.Float)
 	total_sales = db.Column(db.Integer, default=0)
-	# contracts = db.relationship('Contract', secondary=contract_agent, backref=db.backref('employee', lazy='subquery'))
-	# contracts = db.relationship('Contract', backref='employee', cascade="all, delete")
 
 
 class Customer(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	first_name = db.Column(db.String(50))
 	last_name = db.Column(db.String(50))
-	fathers_name = db.Column(db.String(50))
 	identity_card = db.Column(db.String(12), unique=True)
 	mobile = db.Column(db.String(12), unique=True)
-	phone_number = db.Column(db.String(12), unique=True)
 	email = db.Column(db.String(120), unique=True)
 	address = db.Column(db.String(250))
 
-
-	# estates = db.relationship('Estate', secondary=estate_owners, backref=db.backref('customer', lazy='subquery'))
-	# contracts = db.relationship('Contract', secondary=customer_contract, backref=db.backref('customer', lazy='subquery'))
 
 class Estate(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	postal_code = db.Column(db.String(20), unique=True)
 	owner = db.relationship('Customer', secondary=estate_owners, backref=db.backref('estates', lazy='subquery'))
+	address = db.Column(db.String(250))
 	estate_type = db.Column(db.String(50))
 	floor_space = db.Column(db.Float)
-	number_of_balconies = db.Column(db.Integer, default=0)
 	number_of_bedrooms = db.Column(db.Integer, default=0)
 	number_of_bathrooms = db.Column(db.Integer, default=0)
 	number_of_parking = db.Column(db.Integer, default=0)
@@ -72,11 +65,7 @@ class Estate(db.Model):
 	number_of_unit_per_floor = db.Column(db.Integer)
 	elevator = db.Column(db.Boolean)
 	made_year = db.Column(db.Integer)
-	address = db.Column(db.Text(500))
 	description = db.Column(db.Text)
-
-
-# contracts = db.relationship('Contract', backref="estates", cascade="all, delete")
 
 
 class Contract(db.Model):
@@ -87,17 +76,17 @@ class Contract(db.Model):
 	agent_id = db.Column(db.Integer, db.ForeignKey("employee.id"), nullable=True)
 	employee = db.relationship('Employee', backref='contracts', cascade="all, delete")
 
-	# buyer_id = db.Column(db.Integer, db.ForeignKey("buyer.id"), nullable=True)
-	# seller_id = db.Column(db.Integer, db.ForeignKey("seller.id"), nullable=True)
 	buyer = db.relationship('Customer', secondary=customer_contract_buy, backref='buy_contract')
 	seller = db.relationship('Customer', secondary=customer_contract_sell, backref='sell_contract')
 
-	# contracts = db.relationship('Contract', secondary=customer_contract, backref=db.backref('customer', lazy='subquery'))
 	contract_type = db.Column(db.String(30))
+
 	payment_amount = db.Column(db.Float)
 	profit = db.Column(db.Float)
 	date_signed = db.Column(db.DateTime, default=datetime.utcnow())
 	description = db.Column(db.Text(500))
+
+
 
 
 
@@ -123,6 +112,8 @@ def create_employee():
 	for i, name in enumerate(arr):
 		employee1 = Employee(
 			identity_card=f'{i}{i}{i}{i}{i}',
+			username=f"{name}{i}{i}",
+			password=f"{i}{i}{i}{i}{i}",
 			mobile=f'+98{i}{i}{i}{i}{i}{i}',
 			phone_number=f'026{i}{i}{i}{i}{i}',
 			email=f'{i}{i}{i}{i}{i}@mail.com',
@@ -197,6 +188,7 @@ def create_contract():
 	db.session.add(contract1)
 	db.session.commit()
 	return "done contract"
+
 
 if __name__ == '__main__':
 	app.run(debug=True)
