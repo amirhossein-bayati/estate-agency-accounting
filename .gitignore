@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+migrations
+
 # C extensions
 *.so
 
@@ -20,6 +22,8 @@ lib64/
 parts/
 sdist/
 var/
+.idea/
+
 *.egg-info/
 .installed.cfg
 *.egg
@@ -76,7 +80,7 @@ target/
 celerybeat-schedule
 
 # dotenv
-.env
+#.env
 
 # virtualenv
 venv/
