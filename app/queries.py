@@ -52,9 +52,10 @@ class Customer:
 
 class Employee:
 
-    def create(self, username, password, first_name=None, last_name=None, identity_card=None, mobile=None, email=None,
+    @staticmethod
+    def create(username, password, first_name=None, last_name=None, identity_card=None, mobile=None, email=None,
                position=None, salary=None, total_sales=0):
-        existing = self.check_identity_number(identity_card)
+        existing = Employee.check_identity_number(identity_card)
         assert not existing, "identity card exists"
 
         employee = models.Employee(
@@ -73,7 +74,8 @@ class Employee:
         db.session.add(employee)
         db.session.commit()
 
-    def search(self, keyword) -> list:
+    @staticmethod
+    def search(keyword) -> list:
         result = models.Employee.query.filter(or_(
             models.Employee.first_name.like(f'%{keyword}%'),
             models.Employee.last_name.like(f'%{keyword}%'),
@@ -81,7 +83,8 @@ class Employee:
         )).all()
         return result
 
-    def delete(self, id):
+    @staticmethod
+    def delete(id):
         try:
             employee = models.Employee.query.filter_by(id=id).first()
             db.session.delete(employee)
@@ -89,7 +92,8 @@ class Employee:
         except Exception as err:
             print(err)
 
-    def check_identity_number(self, ic) -> bool:
+    @staticmethod
+    def check_identity_number(ic) -> bool:
         result = models.Employee.query.filter_by(identity_card=ic).all()
         if result:
             return True
@@ -99,13 +103,14 @@ class Employee:
 
 class Estate:
 
-    def create(self, postal_code: str = None, owner: list = None, address=None, estate_type=None, floor_space=None,
+    @staticmethod
+    def create(postal_code: str = None, owner: list = None, address=None, estate_type=None, floor_space=None,
                number_of_bedrooms=0,
                number_of_bathrooms=0, number_of_parking=0, floor=0, number_of_floors=None,
                number_of_unit_per_floor=None, elevator=None,
                made_year=None, description=None):
 
-        existing = self.check_postal_number(postal_code)
+        existing = Estate.check_postal_number(postal_code)
         assert not existing, "postal code exists"
 
         estate = models.Estate(
@@ -128,14 +133,16 @@ class Estate:
         db.session.add(estate)
         db.session.commit()
 
-    def search(self, postal_code) -> list:
+    @staticmethod
+    def search(postal_code) -> list:
         result = models.Estate.query.filter_by(postal_code=postal_code).all()
         if result:
             return result
         else:
             return result
 
-    def delete(self, id):
+    @staticmethod
+    def delete(id):
         try:
             estate = models.Estate.query.filter_by(id=id).first()
             db.session.delete(estate)
@@ -143,7 +150,8 @@ class Estate:
         except Exception as err:
             print(err)
 
-    def check_postal_number(self, code) -> bool:
+    @staticmethod
+    def check_postal_number(code) -> bool:
         result = models.Estate.query.filter_by(postal_code=code).all()
         if result:
             return True
