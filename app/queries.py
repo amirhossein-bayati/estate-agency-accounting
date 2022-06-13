@@ -5,9 +5,10 @@ from sqlalchemy import or_
 
 class Customer:
 
-    def create(self, first_name=None, last_name=None, identity_card=None, mobile=None, email=None, address=None):
+    @staticmethod
+    def create(first_name=None, last_name=None, identity_card=None, mobile=None, email=None, address=None):
 
-        existing = self.check_identity_number(identity_card)
+        existing = Customer.check_identity_number(identity_card)
         assert not existing, "identity card exists"
 
         customer = models.Customer(
@@ -22,7 +23,8 @@ class Customer:
         db.session.add(customer)
         db.session.commit()
 
-    def search(self, keyword) -> list:
+    @staticmethod
+    def search(keyword) -> list:
         result = models.Customer.query.filter(or_(
             models.Customer.first_name.like(f'%{keyword}%'),
             models.Customer.last_name.like(f'%{keyword}%'),
@@ -30,14 +32,16 @@ class Customer:
         )).all()
         return result
 
-    def check_identity_number(self, ic) -> bool:
+    @staticmethod
+    def check_identity_number(ic) -> bool:
         result = models.Customer.query.filter_by(identity_card=ic).all()
         if result:
             return True
         else:
             return False
 
-    def delete(self, id):
+    @staticmethod
+    def delete(id):
         try:
             cutomer = models.Customer.query.filter_by(id=id).first()
             db.session.delete(cutomer)
