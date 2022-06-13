@@ -1,74 +1,179 @@
 import models
 from models import app, db
+from sqlalchemy import or_
 
-# Make Customer Instance
-customer1 = models.Customer(
-    first_name="Amirhossein",
-    last_name="bayati",
-    identity_card='0311111111',
-    mobile='+989121111111',
-    email='amir@mail.com',
-    address="krj"
-)
-customer2 = models.Customer(
-    first_name="Mohammad",
-    last_name="Norozi",
-    identity_card='002222222',
-    mobile='+989192222222',
-    email='mohammad@mail.com',
-    address="tehran"
-)
 
-db.session.add(customer1)
-db.session.add(customer2)
-db.session.commit()
+class Customer:
 
-# Make Employee Instance
-employee1 = models.Employee(
-    username="hamid021",
-    password="hamid123",
-    first_name="hamid",
-    last_name="hamidi",
-    identity_card="2121212121",
-    mobile="099999999",
-    email='hamid@mail.com',
-    salary=6000000,
-    total_sales=0,
-    position="leader"
-)
-db.session.add(employee1)
-db.session.commit()
+    def create(self, first_name=None, last_name=None, identity_card=None, mobile=None, email=None, address=None):
 
-# Make Estate Instance
-estate1 = models.Estate(
-    owner=[customer1, customer2],
-    postal_code='12345',
-    estate_type='apartment',
-    address="tehran, niavaran",
-    floor_space=110,
-    number_of_bedrooms=2,
-    number_of_bathrooms=1,
-    number_of_parking=1,
-    floor=2,
-    number_of_floors=3,
-    number_of_unit_per_floor=2,
-    elevator=False,
-    made_year=2000,
-    description="with road view"
-)
+        existing = self.check_identity_number(identity_card)
+        assert not existing, "identity card exists"
 
-db.session.add(estate1)
-db.session.commit()
+        customer = models.Customer(
+            first_name=first_name,
+            last_name=last_name,
+            identity_card=identity_card,
+            mobile=mobile,
+            email=email,
+            address=address
+        )
 
-# Make Contract Instance
-contract1 = models.Contract(
-    estate=estate1,
-    employee=employee1,
-    buyer=[customer1],
-    seller=[customer2],
-    contract_type="rent",
-    payment_amount=10000000,
-    profit=2000000,
-)
-db.session.add(contract1)
-db.session.commit()
+        db.session.add(customer)
+        db.session.commit()
+
+    def search(self, keyword) -> list:
+        result = models.Customer.query.filter(or_(
+            models.Customer.first_name.like(f'%{keyword}%'),
+            models.Customer.last_name.like(f'%{keyword}%'),
+            models.Customer.identity_card == keyword,
+        )).all()
+        return result
+
+    def check_identity_number(self, ic) -> bool:
+        result = models.Customer.query.filter_by(identity_card=ic).all()
+        if result:
+            return True
+        else:
+            return False
+
+    def delete(self, id):
+        try:
+            cutomer = models.Customer.query.filter_by(id=id).first()
+            db.session.delete(cutomer)
+            db.session.commit()
+        except Exception as err:
+            print(err)
+
+
+class Employee:
+
+    def create(self, username, password, first_name=None, last_name=None, identity_card=None, mobile=None, email=None,
+               position=None, salary=None, total_sales=0):
+        existing = self.check_identity_number(identity_card)
+        assert not existing, "identity card exists"
+
+        employee = models.Employee(
+            username=username,
+            password=password,
+            first_name=first_name,
+            last_name=last_name,
+            identity_card=identity_card,
+            mobile=mobile,
+            email=email,
+            position=position,
+            salary=salary,
+            total_sales=total_sales,
+        )
+
+        db.session.add(employee)
+        db.session.commit()
+
+    def search(self, keyword) -> list:
+        result = models.Employee.query.filter(or_(
+            models.Employee.first_name.like(f'%{keyword}%'),
+            models.Employee.last_name.like(f'%{keyword}%'),
+            models.Employee.identity_card == keyword,
+        )).all()
+        return result
+
+    def delete(self, id):
+        try:
+            employee = models.Employee.query.filter_by(id=id).first()
+            db.session.delete(employee)
+            db.session.commit()
+        except Exception as err:
+            print(err)
+
+    def check_identity_number(self, ic) -> bool:
+        result = models.Employee.query.filter_by(identity_card=ic).all()
+        if result:
+            return True
+        else:
+            return False
+
+
+class Estate:
+
+    def create(self, postal_code: str = None, owner: list = None, address=None, estate_type=None, floor_space=None,
+               number_of_bedrooms=0,
+               number_of_bathrooms=0, number_of_parking=0, floor=0, number_of_floors=None,
+               number_of_unit_per_floor=None, elevator=None,
+               made_year=None, description=None):
+
+        existing = self.check_postal_number(postal_code)
+        assert not existing, "postal code exists"
+
+        estate = models.Estate(
+            owner=owner,
+            postal_code=postal_code,
+            estate_type=estate_type,
+            address=address,
+            floor_space=floor_space,
+            number_of_bedrooms=number_of_bedrooms,
+            number_of_bathrooms=number_of_bathrooms,
+            number_of_parking=number_of_parking,
+            floor=floor,
+            number_of_floors=number_of_floors,
+            number_of_unit_per_floor=number_of_unit_per_floor,
+            elevator=elevator,
+            made_year=made_year,
+            description=description
+        )
+
+        db.session.add(estate)
+        db.session.commit()
+
+    def search(self, postal_code) -> list:
+        result = models.Estate.query.filter_by(postal_code=postal_code).all()
+        if result:
+            return result
+        else:
+            return result
+
+    def delete(self, id):
+        try:
+            estate = models.Estate.query.filter_by(id=id).first()
+            db.session.delete(estate)
+            db.session.commit()
+        except Exception as err:
+            print(err)
+
+    def check_postal_number(self, code) -> bool:
+        result = models.Estate.query.filter_by(postal_code=code).all()
+        if result:
+            return True
+        else:
+            return False
+
+
+class Contract:
+
+    def create(self, estate: object, employee: object, buyer: list, seller: list, contract_type: str = None,
+               payment_amount: float = None, profit: float = None):
+        contract = models.Contract(
+            estate=estate,
+            employee=employee,
+            buyer=buyer,
+            seller=seller,
+            contract_type=contract_type,
+            payment_amount=payment_amount,
+            profit=profit,
+        )
+        db.session.add(contract)
+        db.session.commit()
+
+    def search(self, id) -> list:
+        result = models.Contract.query.filter_by(id=id).all()
+        if result:
+            return result
+        else:
+            return result
+
+    def delete(self, id):
+        try:
+            contract = models.Contract.query.filter_by(id=id).first()
+            db.session.delete(contract)
+            db.session.commit()
+        except Exception as err:
+            print(err)
