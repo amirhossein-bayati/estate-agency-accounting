@@ -161,7 +161,8 @@ class Estate:
 
 class Contract:
 
-    def create(self, estate: object, employee: object, buyer: list, seller: list, contract_type: str = None,
+    @staticmethod
+    def create(estate: object, employee: object, buyer: list, seller: list, contract_type: str = None,
                payment_amount: float = None, profit: float = None):
         contract = models.Contract(
             estate=estate,
@@ -175,14 +176,16 @@ class Contract:
         db.session.add(contract)
         db.session.commit()
 
-    def search(self, id) -> list:
+    @staticmethod
+    def search(id) -> list:
         result = models.Contract.query.filter_by(id=id).all()
         if result:
             return result
         else:
             return result
 
-    def delete(self, id):
+    @staticmethod
+    def delete(id):
         try:
             contract = models.Contract.query.filter_by(id=id).first()
             db.session.delete(contract)
