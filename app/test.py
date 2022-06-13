@@ -1,5 +1,6 @@
 from queries import Customer, Employee, Estate, Contract
 
+################## CLASS BASE ##################
 
 # CUSTOMER
 # custom = Customer()
@@ -72,3 +73,68 @@ from queries import Customer, Employee, Estate, Contract
 
 # delete
 # contract.delete(id=2)
+
+
+
+################## CLASS BASE WITH STATIC METHODS ##################
+
+# CUSTOMER
+
+
+# create
+# Customer.create("shokoh", "hamidi", '13213312', '+98938432422', email="divesepidpydarband@mail.com", address="ghazvin, pasdaran")
+
+# search
+# res = Customer.search("rez")
+# print(res)
+
+# delete
+# Customer.delete(4)
+
+####################################
+
+# EMPLOYEE
+
+# create
+# Employee.create(username='baran1200', password='12212', first_name='baran', last_name="habibi")
+
+# search
+# res = Employee.search("ali")
+# print(res)
+
+# delete
+# Employee.delete(id=3)
+
+####################################
+
+# ESTATE
+
+# create
+# owners = Customer.search('shokoh')
+# print(owners)
+# Estate.create(postal_code='4234234', owner=owners)
+
+# search
+# res = Estate.search("12321")
+# print(res[0].owner[0].first_name)
+
+# delete
+# Estate.delete(id=2)
+
+####################################
+
+# CONTRACT
+
+# create
+# estate1 = Estate.search(postal_code='4234234')[0]
+# buyer = Customer.search('ali')
+# seller = Customer.search('shokoh')
+# employee1 = Employee.search('baran')[0]
+# Contract.create(estate=estate1, buyer=buyer, seller=seller, employee=employee1, contract_type="buy/sell")
+
+# search
+# res = Contract.search(id=2)
+# print(res)
+
+# delete
+# Contract.delete(id=2)
