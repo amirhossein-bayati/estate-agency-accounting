@@ -198,9 +198,10 @@ class Contract:
         db.session.commit()
 
 
-        # if contract_type=='buy/sell':
-        #     for i in seller:
-        #         estate.
+        if contract_type=='buy/sell':
+            for i in buyer:
+                Estate.add_owner(estate.id, i.id)
+
     @staticmethod
     def search(id) -> list:
         result = models.Contract.query.filter_by(id=id).all()
