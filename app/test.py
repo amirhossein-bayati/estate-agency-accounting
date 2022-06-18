@@ -136,7 +136,7 @@ from queries import Customer, Employee, Estate, Contract
 # create
 estate1 = Estate.get_by_id(1)
 buyer = Customer.get_by_id(3)
-seller = Customer.get_by_id(2)
+seller = Customer.get_by_id(1)
 employee1 = Employee.get_by_id(1)
 Contract.create(estate=estate1, buyer=[buyer], seller=[seller], employee=employee1, contract_type="buy/sell")
 

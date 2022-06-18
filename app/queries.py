@@ -185,6 +185,7 @@ class Estate:
         customer = Customer.get_by_id(customer_id)
         est = Estate.get_by_id(estate_id)
         owners = est.owner
+        assert customer in owners, f"Customer with \"{customer_id}\" id didnt owned this estate"
         if customer in owners:
             owners.remove(customer)
             est.owner = owners
