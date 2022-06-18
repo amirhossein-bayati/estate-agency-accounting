@@ -180,6 +180,19 @@ class Estate:
         est.owner.append(customer)
         db.session.commit()
 
+    @staticmethod
+    def remove_owner(estate_id, customer_id) -> bool:
+        customer = Customer.get_by_id(customer_id)
+        est = Estate.get_by_id(estate_id)
+        owners = est.owner
+        if customer in owners:
+            owners.remove(customer)
+            est.owner = owners
+            db.session.commit()
+            return True
+        else:
+            return False
+
 class Contract:
 
     @staticmethod
