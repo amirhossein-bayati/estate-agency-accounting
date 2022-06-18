@@ -214,6 +214,8 @@ class Contract:
         if contract_type=='buy/sell':
             for i in buyer:
                 Estate.add_owner(estate.id, i.id)
+            for i in seller:
+                Estate.remove_owner(estate.id, i.id)
 
     @staticmethod
     def search(id) -> list:
