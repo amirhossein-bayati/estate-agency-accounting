@@ -91,6 +91,9 @@ from queries import Customer, Employee, Estate, Contract
 # delete
 # Customer.delete(4)
 
+# get by id
+# res = Customer.get_by_id("1")
+# print(res)
 ####################################
 
 # EMPLOYEE
@@ -120,6 +123,12 @@ from queries import Customer, Employee, Estate, Contract
 
 # delete
 # Estate.delete(id=2)
+
+
+# owner = Customer.get_by_id(2)
+# est = Estate.get_by_id(1)
+# print(est.owner.append(owner))
+Estate.add_owner(1, 2)
 
 ####################################
 

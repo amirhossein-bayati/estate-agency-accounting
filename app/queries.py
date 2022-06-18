@@ -49,6 +49,11 @@ class Customer:
         except Exception as err:
             print(err)
 
+    @staticmethod
+    def get_by_id(id) -> object:
+        res = models.Customer.query.filter_by(id=id).first()
+        return res
+
 
 class Employee:
 
@@ -99,6 +104,11 @@ class Employee:
             return True
         else:
             return False
+
+    @staticmethod
+    def get_by_id(id) -> object:
+        res = models.Employee.query.filter_by(id=id).first()
+        return res
 
 
 class Estate:
@@ -158,6 +168,17 @@ class Estate:
         else:
             return False
 
+    @staticmethod
+    def get_by_id(id) -> object:
+        res = models.Estate.query.filter_by(id=id).first()
+        return res
+
+    @staticmethod
+    def add_owner(estate_id, customer_id):
+        customer = Customer.get_by_id(customer_id)
+        est = Estate.get_by_id(estate_id)
+        est.owner.append(customer)
+        db.session.commit()
 
 class Contract:
 
@@ -176,6 +197,10 @@ class Contract:
         db.session.add(contract)
         db.session.commit()
 
+
+        # if contract_type=='buy/sell':
+        #     for i in seller:
+        #         estate.
     @staticmethod
     def search(id) -> list:
         result = models.Contract.query.filter_by(id=id).all()
@@ -192,3 +217,8 @@ class Contract:
             db.session.commit()
         except Exception as err:
             print(err)
+
+    @staticmethod
+    def get_by_id(id) -> object:
+        res = models.Contract.query.filter_by(id=id).first()
+        return res
