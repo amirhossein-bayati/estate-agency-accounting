@@ -55,6 +55,12 @@ class Customer:
         return res
 
 
+    @staticmethod
+    def get_by_identity_card(id) -> object:
+        res = models.Customer.query.filter_by(identity_card=id).first()
+        return res
+
+
 class Employee:
 
     @staticmethod
@@ -110,6 +116,10 @@ class Employee:
         res = models.Employee.query.filter_by(id=id).first()
         return res
 
+    @staticmethod
+    def get_by_identity_card(id) -> object:
+        res = models.Employee.query.filter_by(identity_card=id).first()
+        return res
 
 class Estate:
 
@@ -120,11 +130,22 @@ class Estate:
                number_of_unit_per_floor=None, elevator=None,
                made_year=None, description=None):
 
+        owners = []
         existing = Estate.check_postal_number(postal_code)
         assert not existing, "postal code exists"
 
+        for i in owner:
+            customer = Customer.get_by_identity_card(i)
+            print(customer)
+            # check if customer exists
+            existing = Customer.check_identity_number(i)
+            print(existing)
+            assert existing, "customer does not exist"
+
+            owners.append(customer)
+        
         estate = models.Estate(
-            owner=owner,
+            owner=owners,
             postal_code=postal_code,
             estate_type=estate_type,
             address=address,
@@ -194,16 +215,60 @@ class Estate:
         else:
             return False
 
+
+    @staticmethod
+    def get_by_postal_number(code):
+        result = models.Estate.query.filter_by(postal_code=code).first()
+        return result
+
 class Contract:
 
     @staticmethod
-    def create(estate: object, employee: object, buyer: list, seller: list, contract_type: str = None,
+    def create(estate_postal_code: str, employee_identity_card: str, buyer: list, seller: list, contract_type: str = None,
                payment_amount: float = None, profit: float = None):
+        
+        # print(buyer)
+        # print(seller)
+        
+        buyers=[]
+        sellers=[]
+
+        # check if estate exists
+        existing = Estate.check_postal_number(estate_postal_code)
+        assert existing, "estate does not exist"
+        estate = Estate.get_by_postal_number(estate_postal_code)
+
+        # print("==========================")
+               
+
+        # check if employee exists
+        existing = Employee.check_identity_number(employee_identity_card)
+        assert existing, "employee does not exist"
+        employee = Employee.get_by_identity_card(employee_identity_card)
+
+        # check if buyer exists
+        for i in buyer:
+            existing = Customer.check_identity_number(i)
+            assert existing, "buyer does not exist"
+            buyers.append(Customer.get_by_identity_card(i))
+
+
+        # check if seller exists
+        for i in seller:
+            existing = Customer.check_identity_number(i)
+            assert existing, "seller does not exist"
+            sellers.append(Customer.get_by_identity_card(i))
+
+
+
+        # print(buyers)
+        # print(sellers)
+
         contract = models.Contract(
             estate=estate,
             employee=employee,
-            buyer=buyer,
-            seller=seller,
+            buyer=buyers,
+            seller=sellers,
             contract_type=contract_type,
             payment_amount=payment_amount,
             profit=profit,
@@ -213,9 +278,9 @@ class Contract:
 
 
         if contract_type=='buy/sell':
-            for i in buyer:
+            for i in buyers:
                 Estate.add_owner(estate.id, i.id)
-            for i in seller:
+            for i in sellers:
                 Estate.remove_owner(estate.id, i.id)
 
     @staticmethod

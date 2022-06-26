@@ -12,7 +12,9 @@ username = os.getenv("host_username")
 password = os.getenv("host_password")
 db_name = os.getenv("db_name")
 
-conn = "mysql+pymysql://{0}:{1}@{2}/{3}".format(username, password, host, db_name)
+# conn = "mysql+pymysql://{0}:{1}@{2}/{3}".format(username, password, host, db_name)
+conn = "sqlite:///db.sqlite"
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = conn

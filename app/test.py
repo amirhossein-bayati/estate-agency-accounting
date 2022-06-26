@@ -129,16 +129,19 @@ from queries import Customer, Employee, Estate, Contract
 # print(est.owner.append(owner))
 # Estate.add_owner(1, 2)
 
+
+# create
+# Estate.create(postal_code='3456', owner=['002222222'])
 ####################################
 
 # CONTRACT
 
 # create
-estate1 = Estate.get_by_id(1)
-buyer = Customer.get_by_id(3)
-seller = Customer.get_by_id(1)
-employee1 = Employee.get_by_id(1)
-Contract.create(estate=estate1, buyer=[buyer], seller=[seller], employee=employee1, contract_type="buy/sell")
+#estate1 = Estate.get_by_id(1)
+#buyer = Customer.get_by_id(3)
+#seller = Customer.get_by_id(1)
+#employee1 = Employee.get_by_id(1)
+#Contract.create(estate=estate1, buyer=[buyer], seller=[seller], employee=employee1, contract_type="buy/sell")
 
 # search
 # res = Contract.search(id=2)
@@ -146,3 +149,7 @@ Contract.create(estate=estate1, buyer=[buyer], seller=[seller], employee=employe
 
 # delete
 # Contract.delete(id=2)
+
+
+# create
+# Contract.create(estate_postal_code='34577856', buyer=['0311111111'], seller=['002222222'], employee_identity_card='2121212121', contract_type="buy/sell")
