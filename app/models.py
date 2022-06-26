@@ -55,6 +55,9 @@ class Employee(db.Model):
 	salary = db.Column(db.Float)
 	total_sales = db.Column(db.Integer, default=0)
 
+	def __repr__(self):
+        return f'<Employee {self.username}>'
+
 
 class Customer(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
@@ -64,6 +67,9 @@ class Customer(db.Model):
 	mobile = db.Column(db.String(13), unique=True)
 	email = db.Column(db.String(120), unique=True)
 	address = db.Column(db.String(250))
+
+	def __repr__(self):
+        return f'<Customer {self.first_name} {self.last_name}>'
 
 
 class Estate(db.Model):
@@ -82,6 +88,9 @@ class Estate(db.Model):
 	elevator = db.Column(db.Boolean)
 	made_year = db.Column(db.Integer)
 	description = db.Column(db.Text)
+
+	def __repr__(self):
+        return f'<Estate {self.postal_code}>'
 
 
 class Contract(db.Model):
@@ -102,6 +111,9 @@ class Contract(db.Model):
 	date_signed = db.Column(db.DateTime, default=datetime.utcnow())
 	description = db.Column(db.Text(500))
 
+	def __repr__(self):
+		return f'<Contract {self.id}>'
+	
 
 
 
