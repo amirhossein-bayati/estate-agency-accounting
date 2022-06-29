@@ -13,6 +13,7 @@ Jinja2==3.1.2
 Mako==1.2.0
 MarkupSafe==2.1.1
 pycparser==2.21
+pymssql==2.2.5
 PyMySQL==1.0.2
 PyQt5==5.15.6
 PyQt5-Qt5==5.15.2

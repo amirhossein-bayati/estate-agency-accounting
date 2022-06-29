@@ -75,7 +75,6 @@ from queries import Customer, Employee, Estate, Contract
 # contract.delete(id=2)
 
 
-
 ################## CLASS BASE WITH STATIC METHODS ##################
 
 # CUSTOMER
@@ -91,6 +90,9 @@ from queries import Customer, Employee, Estate, Contract
 # delete
 # Customer.delete(4)
 
+# get by id
+# res = Customer.get_by_id("1")
+# print(res)
 ####################################
 
 # EMPLOYEE
@@ -121,16 +123,25 @@ from queries import Customer, Employee, Estate, Contract
 # delete
 # Estate.delete(id=2)
 
+
+# owner = Customer.get_by_id(2)
+# est = Estate.get_by_id(1)
+# print(est.owner.append(owner))
+# Estate.add_owner(1, 2)
+
+
+# create
+# Estate.create(postal_code='3456', owner=['002222222'])
 ####################################
 
 # CONTRACT
 
 # create
-# estate1 = Estate.search(postal_code='4234234')[0]
-# buyer = Customer.search('ali')
-# seller = Customer.search('shokoh')
-# employee1 = Employee.search('baran')[0]
-# Contract.create(estate=estate1, buyer=buyer, seller=seller, employee=employee1, contract_type="buy/sell")
+#estate1 = Estate.get_by_id(1)
+#buyer = Customer.get_by_id(3)
+#seller = Customer.get_by_id(1)
+#employee1 = Employee.get_by_id(1)
+#Contract.create(estate=estate1, buyer=[buyer], seller=[seller], employee=employee1, contract_type="buy/sell")
 
 # search
 # res = Contract.search(id=2)
@@ -138,3 +149,7 @@ from queries import Customer, Employee, Estate, Contract
 
 # delete
 # Contract.delete(id=2)
+
+
+# create
+# Contract.create(estate_postal_code='34577856', buyer=['0311111111'], seller=['002222222'], employee_identity_card='2121212121', contract_type="buy/sell")
