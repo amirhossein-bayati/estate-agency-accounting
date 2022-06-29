@@ -299,18 +299,21 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "#searchBtn_2, #searchBtn_3, #searchBtn_4, #searchBtn_5,\n"
-"#newBtn_2, #newBtn_3, #newBtn_4, #newBtn_5 {\n"
+"#newBtn_2, #newBtn_3, #newBtn_4, #newBtn_5, "
+"#deleteBtn_2, #deleteBtn_3, #deleteBtn_4, #deleteBtn_5 {\n"
 "    border: 5px solid rgb(52, 59, 72);\n"
 "    border-radius: 15px;    \n"
 "    background-color: rgb(52, 59, 72);\n"
 "    padding: 18px;\n"
 "    margin: 0px 5px\n"
 "}\n"
-"#searchBtn_2:hover, #searchBtn_3:hover, #searchBtn_4:hover, #searchBtn_5:hover, #newBtn_2:hover, #newBtn_3:hover, #newBtn_4:hover, #newBtn_5:hover {\n"
+"#searchBtn_2:hover, #searchBtn_3:hover, #searchBtn_4:hover, #searchBtn_5:hover, #newBtn_2:hover, #newBtn_3:hover, #newBtn_4:hover, #newBtn_5:hover,"
+"#deleteBtn_2:hover, #deleteBtn_3:hover, #deleteBtn_4:hover, #deleteBtn_5:hover {\n"
 "    background-color: rgb(57, 65, 80);\n"
 "    border: 5px solid rgb(61, 70, 86);\n"
 "}\n"
-"#searchBtn_2:pressed, #searchBtn_3:pressed, #searchBtn_4:pressed, #searchBtn_5:pressed , #newBtn_2:pressed, #newBtn_3:pressed, #newBtn_4:pressed, #newBtn_5:pressed {    \n"
+"#searchBtn_2:pressed, #searchBtn_3:pressed, #searchBtn_4:pressed, #searchBtn_5:pressed , #newBtn_2:pressed, #newBtn_3:pressed, #newBtn_4:pressed, #newBtn_5:pressed,"
+"#deleteBtn_2:pressed, #deleteBtn_3:pressed, #deleteBtn_4:pressed, #deleteBtn_5:pressed {\n"
 "    background-color: rgb(35, 40, 49);\n"
 "    border: 5px solid rgb(43, 50, 61);\n"
 "}\n"
@@ -686,6 +689,17 @@ class Ui_MainWindow(object):
         # self.newBtn_2.setIconSize(QtCore.QSize(60, 60))
         self.newBtn_2.setObjectName("newBtn_2")
         self.horizontalLayout_2.addWidget(self.newBtn_2)
+        self.deleteBtn_2 = QtWidgets.QPushButton(self.ertateFrame_3)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.deleteBtn_2.setFont(font)
+        self.deleteBtn_2.setStyleSheet("text-align: right;")
+        icon10 = QtGui.QIcon()
+        icon10.addPixmap(QtGui.QPixmap(":/icons/icons/trash.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.deleteBtn_2.setIcon(icon10)
+        # self.deleteBtn_2.setIconSize(QtCore.QSize(60, 60))
+        self.deleteBtn_2.setObjectName("deleteBtn_2")
+        self.horizontalLayout_2.addWidget(self.deleteBtn_2)
         self.horizontalLayout_3.addWidget(self.ertateFrame_3, 0, QtCore.Qt.AlignRight)
         self.verticalLayout_10.addWidget(self.estateWidget_1)
         self.verticalLayout_12.addWidget(self.mainBodyContent_2)
@@ -984,6 +998,15 @@ class Ui_MainWindow(object):
         # self.newBtn_3.setIconSize(QtCore.QSize(60, 60))
         self.newBtn_3.setObjectName("newBtn_3")
         self.horizontalLayout_5.addWidget(self.newBtn_3)
+        self.deleteBtn_3 = QtWidgets.QPushButton(self.customerFrame_3)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.deleteBtn_3.setFont(font)
+        self.deleteBtn_3.setStyleSheet("text-align: right;")
+        self.deleteBtn_3.setIcon(icon10)
+        # self.deleteBtn_3.setIconSize(QtCore.QSize(60, 60))
+        self.deleteBtn_3.setObjectName("deleteBtn_3")
+        self.horizontalLayout_5.addWidget(self.deleteBtn_3)
         self.horizontalLayout_4.addWidget(self.customerFrame_3, 0, QtCore.Qt.AlignRight)
         self.verticalLayout_13.addWidget(self.customerWidget_1)
         self.verticalLayout_19.addWidget(self.mainBodyContent_3)
@@ -1282,6 +1305,15 @@ class Ui_MainWindow(object):
         # self.newBtn_4.setIconSize(QtCore.QSize(60, 60))
         self.newBtn_4.setObjectName("newBtn_4")
         self.horizontalLayout_7.addWidget(self.newBtn_4)
+        self.deleteBtn_4 = QtWidgets.QPushButton(self.contractFrame_3)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.deleteBtn_4.setFont(font)
+        self.deleteBtn_4.setStyleSheet("text-align: right;")
+        self.deleteBtn_4.setIcon(icon10)
+        # self.deleteBtn_4.setIconSize(QtCore.QSize(60, 60))
+        self.deleteBtn_4.setObjectName("deleteBtn_4")
+        self.horizontalLayout_7.addWidget(self.deleteBtn_4)
         self.horizontalLayout_6.addWidget(self.contractFrame_3, 0, QtCore.Qt.AlignRight)
         self.verticalLayout_15.addWidget(self.contractWidget_1)
         self.verticalLayout_20.addWidget(self.mainBodyContent_4)
@@ -1584,6 +1616,15 @@ class Ui_MainWindow(object):
         # self.newBtn_5.setIconSize(QtCore.QSize(60, 60))
         self.newBtn_5.setObjectName("newBtn_5")
         self.horizontalLayout_33.addWidget(self.newBtn_5)
+        self.deleteBtn_5 = QtWidgets.QPushButton(self.employeeFrame_3)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.deleteBtn_5.setFont(font)
+        self.deleteBtn_5.setStyleSheet("text-align: right;")
+        self.deleteBtn_5.setIcon(icon10)
+        # self.deleteBtn_5.setIconSize(QtCore.QSize(60, 60))
+        self.deleteBtn_5.setObjectName("deleteBtn_5")
+        self.horizontalLayout_33.addWidget(self.deleteBtn_5)
         self.horizontalLayout_12.addWidget(self.employeeFrame_3, 0, QtCore.Qt.AlignRight)
         self.verticalLayout_17.addWidget(self.employeeWidget_2)
         self.verticalLayout_21.addWidget(self.mainBodyContent_5)
@@ -1650,6 +1691,11 @@ class Ui_MainWindow(object):
         self.othersBtn_3.clicked.connect(lambda: self.loadData())
         self.othersBtn_4.clicked.connect(lambda: self.loadData())
         self.othersBtn_5.clicked.connect(lambda: self.loadData())
+
+        self.deleteBtn_2.clicked.connect(lambda: self.deleteSelect(0))
+        self.deleteBtn_3.clicked.connect(lambda: self.deleteSelect(1))
+        self.deleteBtn_4.clicked.connect(lambda: self.deleteSelect(2))
+        self.deleteBtn_5.clicked.connect(lambda: self.deleteSelect(3))
 
 
         self.open_login()
@@ -1738,6 +1784,7 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Line"))
         self.tableWidget_2.setSortingEnabled(__sortingEnabled)
         self.newBtn_2.setText(_translate("MainWindow", "New"))
+        self.deleteBtn_2.setText(_translate("MainWindow", "Delete"))
         self.customerLabel.setText(_translate("MainWindow", "Customers"))
         self.lineEdit_3.setPlaceholderText(_translate("MainWindow", "search..."))
         self.searchBtn_3.setText(_translate("MainWindow", "search"))
@@ -1794,6 +1841,7 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Line"))
         self.tableWidget_3.setSortingEnabled(__sortingEnabled)
         self.newBtn_3.setText(_translate("MainWindow", "New"))
+        self.deleteBtn_3.setText(_translate("MainWindow", "Delete"))
         self.contractLabel.setText(_translate("MainWindow", "Contracts"))
         self.lineEdit_4.setPlaceholderText(_translate("MainWindow", "search..."))
         self.searchBtn_4.setText(_translate("MainWindow", "search"))
@@ -1850,6 +1898,7 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Line"))
         self.tableWidget_4.setSortingEnabled(__sortingEnabled)
         self.newBtn_4.setText(_translate("MainWindow", "New"))
+        self.deleteBtn_4.setText(_translate("MainWindow", "Delete"))
         self.employeeLabel.setText(_translate("MainWindow", "Employees"))
         self.lineEdit_5.setPlaceholderText(_translate("MainWindow", "search..."))
         self.searchBtn_5.setText(_translate("MainWindow", "search"))
@@ -1906,8 +1955,10 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Line"))
         self.tableWidget_5.setSortingEnabled(__sortingEnabled)
         self.newBtn_5.setText(_translate("MainWindow", "New"))
+        self.deleteBtn_5.setText(_translate("MainWindow", "Delete"))
         self.infoLabel.setText(_translate("MainWindow", "Info"))
         self.aboutusLabel.setText(_translate("MainWindow", "About Us"))
+
 
     def open_dialog(self, Index):
         dialog = QtWidgets.QDialog()
@@ -1917,6 +1968,28 @@ class Ui_MainWindow(object):
         dialog.exec_()
         dialog.show()
         self.loadData()
+
+    def deleteSelect(self, index):
+        print(self.tableWidget_4.currentRow())
+
+        match index:
+            case 0:
+                estate = queries.Estate()
+                estate.delete(self.tableWidget_2.item(self.tableWidget_2.currentRow(), 0).text())
+                self.tableWidget_2.removeRow(self.tableWidget_2.currentRow())
+            case 1:
+                customer = queries.Customer()
+                customer.delete(self.tableWidget_3.item(self.tableWidget_3.currentRow(), 0).text())
+                self.tableWidget_3.removeRow(self.tableWidget_3.currentRow())
+            case 2:
+                contract = queries.Contract()
+                contract.delete(self.tableWidget_4.item(self.tableWidget_4.currentRow(), 0).text())
+                self.tableWidget_4.removeRow(self.tableWidget_4.currentRow())
+            case 3:
+                employee = queries.Employee()
+                employee.delete(self.tableWidget_5.item(self.tableWidget_5.currentRow(), 0).text())
+                self.tableWidget_5.removeRow(self.tableWidget_5.currentRow())
+
 
     def loadData(self):
         #! edit number of rows
