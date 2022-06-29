@@ -135,6 +135,7 @@ class Ui_loginDialog(object):
         else:
                 #! not working if run by main
                 loginDialog.close()
+                loginDialog.deleteLater()
                 
 
     def retranslateUi(self, loginDialog):
