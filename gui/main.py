@@ -28,12 +28,11 @@ class MainWindow(QMainWindow):
         self.switchPages()
         self.setTableHeaders()
         
-        #! if login dialog closed manualy it will lead to main window
         self.show()
         # if(not self.ui.user):
         #     sys.exit()
         # else:
-            # self.show()
+        #     self.show()
 
 
     def switchPages(self):

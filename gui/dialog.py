@@ -1318,7 +1318,7 @@ class Ui_dialog(object):
             case 0:
                 input[1] = list(input[1].split(","))
                 print(input)
-                estate_owners = queries.e
+                # estate_owners = queries.e
                 estate = queries.Estate()
                 estate.create(input[0], input[1], input[2], input[3], input[4], input[5], input[6], input[7],
                 input[8], input[9], input[10], input[11], input[12], input[13])
