@@ -1719,7 +1719,7 @@ class Ui_MainWindow(object):
         self.InfoBtn.setText(_translate("MainWindow", "Info"))
         self.aboutUsBtn.setToolTip(_translate("MainWindow", "About Us"))
         self.aboutUsBtn.setText(_translate("MainWindow", "About Us"))
-        self.homeLabel.setText(_translate("MainWindow", "Home"))
+        self.homeLabel.setText(_translate("MainWindow", "Welcome To Our Estate Agency"))
         self.estateLabel.setText(_translate("MainWindow", "Estates"))
         self.lineEdit_2.setPlaceholderText(_translate("MainWindow", "search on postal code"))
         self.searchBtn_2.setText(_translate("MainWindow", "search"))
@@ -1956,8 +1956,8 @@ class Ui_MainWindow(object):
         self.tableWidget_5.setSortingEnabled(__sortingEnabled)
         self.newBtn_5.setText(_translate("MainWindow", "New"))
         self.deleteBtn_5.setText(_translate("MainWindow", "Delete"))
-        self.infoLabel.setText(_translate("MainWindow", "Info"))
-        self.aboutusLabel.setText(_translate("MainWindow", "About Us"))
+        self.infoLabel.setText(_translate("MainWindow", "This is an Estate Agency app with following features:\n\tStore & Display data\n\tRemove Data\n\tSearch on Data"))
+        self.aboutusLabel.setText(_translate("MainWindow", "Our Group:\n\tAmirHossein Bayati\n\tShaghayegh Naghizadeh\n\tParham Tavakoli\n\tAmirHossein Vahdati"))
 
 
     def open_dialog(self, Index):
