@@ -107,13 +107,12 @@ class Ui_loginDialog(object):
         self.verticalLayout.addWidget(self.buttonBox)
         self.verticalLayout_2.addWidget(self.centralWidget)
 
+        self.user = []
         self.buttonBox.clicked.connect(lambda: self.loginData(loginDialog))
         self.retranslateUi(loginDialog)
         QtCore.QMetaObject.connectSlotsByName(loginDialog)
 
-
     def loginData(self, loginDialog):
-        self.user = []
         userFound = False
         self.user.append(self.usernameLineEdit.text())
         self.user.append(self.passwordLineEdit.text())
@@ -125,13 +124,17 @@ class Ui_loginDialog(object):
         employee = models.Employee.query.all()
         for row in employee:
                 if(row.username == self.user[0] and row.password == self.user[1]):
-                        #! not working if run by main
-                        #! should be clicked twice
-                        self.buttonBox.clicked.connect(loginDialog.accept)
+                        # self.buttonBox.clicked.connect(loginDialog.accept)
                         userFound = True
         if(not userFound):
-                self.errorLabel.setText(QtCore.QCoreApplication.translate("loginDialog", "Incorrect username or password!"))
-                
+                print(self.user)
+                self.errorLabel.setText("Incorrect username or password!")
+                self.user.clear()
+                self.passwordLineEdit.setReadOnly(False)
+
+        else:
+                #! not working if run by main
+                loginDialog.close()
                 
 
     def retranslateUi(self, loginDialog):
@@ -141,7 +144,7 @@ class Ui_loginDialog(object):
         self.usernameLabel.setText(_translate("loginDialog", "username"))
         self.passwordLabel.setText(_translate("loginDialog", "password"))
         self.errorLabel.setText(_translate("loginDialog", ""))
- 
+
 
 # if __name__ == "__main__":
 #     import sys
