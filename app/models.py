@@ -12,8 +12,8 @@ username = os.getenv("host_username")
 password = os.getenv("host_password")
 db_name = os.getenv("db_name")
 
-# conn = "mysql+pymysql://{0}:{1}@{2}/{3}".format(username, password, host, db_name)
-conn = "sqlite:///db.sqlite"
+conn = "mysql+pymysql://{0}:{1}@{2}/{3}".format(username, password, host, db_name)
+# conn = "sqlite:///db.sqlite"
 
 # conn = "mysql+pymysql://{0}:{1}@{2}/{3}".format(username, password, host, db_name)
 # conn = f'mssql+pymssql://@DESKTOP-K105VCB\\amirhossein:estate_agency:?charset=utf8'
@@ -115,10 +115,10 @@ class Contract(db.Model):
 
 	id = db.Column(db.Integer, primary_key=True)
 	estate_id = db.Column(db.Integer, db.ForeignKey("estate.id"), nullable=True)
-	estate = db.relationship('Estate', backref="contracts", cascade="all, delete")
+	estate = db.relationship('Estate', backref="contracts")
 
 	agent_id = db.Column(db.Integer, db.ForeignKey("employee.id"), nullable=True)
-	employee = db.relationship('Employee', backref='contracts', cascade="all, delete")
+	employee = db.relationship('Employee', backref='contracts')
 
 	buyer = db.relationship('Customer', secondary=customer_contract_buy, backref='buy_contract')
 	seller = db.relationship('Customer', secondary=customer_contract_sell, backref='sell_contract')
