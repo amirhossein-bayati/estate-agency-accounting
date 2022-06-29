@@ -15,6 +15,15 @@ db_name = os.getenv("db_name")
 # conn = "mysql+pymysql://{0}:{1}@{2}/{3}".format(username, password, host, db_name)
 conn = "sqlite:///db.sqlite"
 
+# conn = "mysql+pymysql://{0}:{1}@{2}/{3}".format(username, password, host, db_name)
+# conn = f'mssql+pymssql://@DESKTOP-K105VCB\\amirhossein:estate_agency:?charset=utf8'
+
+# DB_HOST = "localhost"
+# DB_PASSWORD = ""
+# DB_USER = "estate_agency"
+
+# conn = f'mssql+pymssql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}?charset=utf8'
+# conn = f"mssql+pymssql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/?charset=utf8"
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = conn
@@ -43,6 +52,9 @@ customer_contract_sell = db.Table('customer_contract_sell',
 
 
 class Employee(db.Model):
+	def __repr__(self):
+		return f'<Employee {self.username}>'
+
 	id = db.Column(db.Integer, primary_key=True)
 	username = db.Column(db.String(50), unique=True, nullable=False)
 	password = db.Column(db.String(50), unique=True, nullable=False)
@@ -55,11 +67,13 @@ class Employee(db.Model):
 	salary = db.Column(db.Float)
 	total_sales = db.Column(db.Integer, default=0)
 
-	def __repr__(self):
-        return f'<Employee {self.username}>'
+
 
 
 class Customer(db.Model):
+	def __repr__(self):
+		return f'<Customer {self.first_name} {self.last_name}>'
+
 	id = db.Column(db.Integer, primary_key=True)
 	first_name = db.Column(db.String(50))
 	last_name = db.Column(db.String(50))
@@ -68,11 +82,13 @@ class Customer(db.Model):
 	email = db.Column(db.String(120), unique=True)
 	address = db.Column(db.String(250))
 
-	def __repr__(self):
-        return f'<Customer {self.first_name} {self.last_name}>'
+
 
 
 class Estate(db.Model):
+	def __repr__(self):
+		return f'Estate {self.postal_code}'
+
 	id = db.Column(db.Integer, primary_key=True)
 	postal_code = db.Column(db.String(20), unique=True)
 	owner = db.relationship('Customer', secondary=estate_owners, backref=db.backref('estates', lazy='subquery'))
@@ -89,11 +105,14 @@ class Estate(db.Model):
 	made_year = db.Column(db.Integer)
 	description = db.Column(db.Text)
 
-	def __repr__(self):
-        return f'<Estate {self.postal_code}>'
+
+
 
 
 class Contract(db.Model):
+	def __repr__(self):
+		return f'<Contract {self.id}>'
+
 	id = db.Column(db.Integer, primary_key=True)
 	estate_id = db.Column(db.Integer, db.ForeignKey("estate.id"), nullable=True)
 	estate = db.relationship('Estate', backref="contracts", cascade="all, delete")
@@ -111,9 +130,7 @@ class Contract(db.Model):
 	date_signed = db.Column(db.DateTime, default=datetime.utcnow())
 	description = db.Column(db.Text(500))
 
-	def __repr__(self):
-		return f'<Contract {self.id}>'
-	
+
 
 
 
