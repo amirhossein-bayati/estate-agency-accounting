@@ -98,7 +98,7 @@ from queries import Customer, Employee, Estate, Contract
 # EMPLOYEE
 
 # create
-# Employee.create(username='baran1200', password='12212', first_name='baran', last_name="habibi")
+# Employee.create(username='baran1200', password='12212', first_name='baran', last_name="habibi", identity_card="2121212121")
 
 # search
 # res = Employee.search("ali")
@@ -148,8 +148,8 @@ from queries import Customer, Employee, Estate, Contract
 # print(res)
 
 # delete
-# Contract.delete(id=2)
+# Contract.delete(id=7)
 
 
 # create
-# Contract.create(estate_postal_code='34577856', buyer=['0311111111'], seller=['002222222'], employee_identity_card='2121212121', contract_type="buy/sell")
+# Contract.create(estate_postal_code='3456', buyer=['0311111111'], seller=['002222222'], employee_identity_card='2121212121', contract_type="buy/sell")
