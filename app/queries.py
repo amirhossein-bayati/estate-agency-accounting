@@ -245,6 +245,7 @@ class Contract:
         existing = Employee.check_identity_number(employee_identity_card)
         assert existing, "employee does not exist"
         employee = Employee.get_by_identity_card(employee_identity_card)
+        employee.total_sales += 1
 
         # check if buyer exists
         for i in buyer:
