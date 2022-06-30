@@ -1994,12 +1994,11 @@ class Ui_MainWindow(object):
         #! edit number of rows
         estate = models.Estate.query.all()
         estates = queries.Estate()
-        owner = estates.
         tableRow = 0
         for row in estate:
             self.tableWidget_2.setItem(tableRow, 0, QtWidgets.QTableWidgetItem(str(row.id)))
             self.tableWidget_2.setItem(tableRow, 1, QtWidgets.QTableWidgetItem(str(row.postal_code)))
-            self.tableWidget_2.setItem(tableRow, 2, QtWidgets.QTableWidgetItem(str(row.owner)))
+            self.tableWidget_2.setItem(tableRow, 2, QtWidgets.QTableWidgetItem(str(estates.show_owners(row.id))))
             self.tableWidget_2.setItem(tableRow, 3, QtWidgets.QTableWidgetItem(str(row.address)))
             self.tableWidget_2.setItem(tableRow, 4, QtWidgets.QTableWidgetItem(str(row.estate_type)))
             self.tableWidget_2.setItem(tableRow, 5, QtWidgets.QTableWidgetItem(str(row.floor_space)))
