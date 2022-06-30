@@ -1993,6 +1993,8 @@ class Ui_MainWindow(object):
     def loadData(self):
         #! edit number of rows
         estate = models.Estate.query.all()
+        estates = queries.Estate()
+        owner = estates.
         tableRow = 0
         for row in estate:
             self.tableWidget_2.setItem(tableRow, 0, QtWidgets.QTableWidgetItem(str(row.id)))
