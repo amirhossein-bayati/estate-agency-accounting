@@ -6,7 +6,6 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog
 
 # IMPORT GUI FILE
 from main_interface import *
-# from dialog import *
 
 # IMPORT DB
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'app'))
@@ -20,19 +19,11 @@ class MainWindow(QMainWindow):
         QMainWindow.__init__(self)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-
-        # dialog = QDialog()
-        # dialog.ui = Ui_dialog()
-        # dialog.ui.setupUi(dialog)
         
         self.switchPages()
         self.setTableHeaders()
         
         self.show()
-        # if(not self.ui.user):
-        #     sys.exit()
-        # else:
-        #     self.show()
 
 
     def switchPages(self):
