@@ -221,6 +221,14 @@ class Estate:
         result = models.Estate.query.filter_by(postal_code=code).first()
         return result
 
+
+    @staticmethod
+    def show_owners(id) -> str:
+        estate = Estate.get_by_id(id)
+        owners_lst = estate.owner
+        owners = ", ".join(str(own) for own in owners_lst)
+        return owners
+
 class Contract:
 
     @staticmethod
@@ -305,3 +313,4 @@ class Contract:
     def get_by_id(id) -> object:
         res = models.Contract.query.filter_by(id=id).first()
         return res
+
