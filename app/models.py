@@ -53,7 +53,7 @@ customer_contract_sell = db.Table('customer_contract_sell',
 
 class Employee(db.Model):
 	def __repr__(self):
-		return f'<Employee {self.username}>'
+		return f'{self.username}'
 
 	id = db.Column(db.Integer, primary_key=True)
 	username = db.Column(db.String(50), unique=True, nullable=False)
@@ -72,7 +72,7 @@ class Employee(db.Model):
 
 class Customer(db.Model):
 	def __repr__(self):
-		return f'<Customer {self.first_name} {self.last_name}>'
+		return f'{self.first_name} {self.last_name}' if self.first_name and self.last_name else f'{self.first_name}'
 
 	id = db.Column(db.Integer, primary_key=True)
 	first_name = db.Column(db.String(50))
@@ -87,7 +87,7 @@ class Customer(db.Model):
 
 class Estate(db.Model):
 	def __repr__(self):
-		return f'Estate {self.postal_code}'
+		return f'{self.postal_code}'
 
 	id = db.Column(db.Integer, primary_key=True)
 	postal_code = db.Column(db.String(20), unique=True)
@@ -111,7 +111,7 @@ class Estate(db.Model):
 
 class Contract(db.Model):
 	def __repr__(self):
-		return f'<Contract {self.id}>'
+		return f'{self.id}'
 
 	id = db.Column(db.Integer, primary_key=True)
 	estate_id = db.Column(db.Integer, db.ForeignKey("estate.id"), nullable=True)

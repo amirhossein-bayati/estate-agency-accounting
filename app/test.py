@@ -127,8 +127,11 @@ from queries import Customer, Employee, Estate, Contract
 # owner = Customer.get_by_id(2)
 # est = Estate.get_by_id(1)
 # print(est.owner.append(owner))
-# Estate.add_owner(1, 2)
+# Estate.add_owner(estate_id=3, customer_id=2)
 
+# SHOW OWNERS
+owns = Estate.show_owners(id=3)
+print(owns)
 
 # create
 # Estate.create(postal_code='3456', owner=['002222222'])
