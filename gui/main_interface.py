@@ -1949,7 +1949,7 @@ class Ui_MainWindow(object):
         self.newBtn_5.setText(_translate("MainWindow", "New"))
         self.deleteBtn_5.setText(_translate("MainWindow", "Delete"))
         self.infoLabel.setText(_translate("MainWindow", "This is an Estate Agency app with following features:\n\n\tStore & Display Data\n\tRemove Data\n\tSearch on Data"))
-        self.aboutusLabel.setText(_translate("MainWindow", "Our Group:\n\tAmirHossein Bayati\n\tShaghayegh Naghizadeh\n\tParham Tavakoli\n\tAmirHossein Vahdati"))
+        self.aboutusLabel.setText(_translate("MainWindow", "Our Group:\n\tAmirHossein Bayati\n\tShaghayegh Naghizadeh"))
 
 
     def open_dialog(self, Index):
