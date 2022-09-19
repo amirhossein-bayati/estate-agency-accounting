@@ -4,7 +4,7 @@
 First make sure that ms sql server is up! <br />
 If you dont have sql sever, make sure use_db="False" is set in '.env' file, then app will connect to sqlite.
 ```
-pip3 install -r requirements.txt
+pip install -r requirements.txt
 set FLASK_APP='models.py'
 cd app
 flask db init && flask db migrate && flask db upgrade
