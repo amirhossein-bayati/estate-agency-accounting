@@ -7,7 +7,6 @@ class Customer:
 
     @staticmethod
     def create(first_name=None, last_name=None, identity_card=None, mobile=None, email=None, address=None):
-
         existing = Customer.check_identity_number(identity_card)
         assert not existing, "identity card exists"
 
@@ -121,6 +120,7 @@ class Employee:
         res = models.Employee.query.filter_by(identity_card=id).first()
         return res
 
+
 class Estate:
 
     @staticmethod
@@ -228,6 +228,7 @@ class Estate:
         owners_lst = estate.owner
         owners = ", ".join(str(own) for own in owners_lst)
         return owners
+
 
 class Contract:
 
